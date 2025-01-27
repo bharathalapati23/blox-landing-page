@@ -41,7 +41,7 @@ export default function Home() {
         </span>
       </div>
       <div className="flex flex-row justify-between items-center w-[calc(100%-112px)] mx-auto border-b-2 border-gray-200 pb-12">
-        <Image src="/logo.png" alt="property" width={390} height={167} />
+        <Image src="/logo1.png" alt="property" width={390} height={167} />
         <div className="flex flex-col gap-3">
           <div className="flex flex-row gap-3">
             <Image src="/Location.svg" alt="linkedin" width={24} height={17} />
