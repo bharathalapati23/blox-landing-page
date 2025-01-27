@@ -31,7 +31,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col justify-center items-center w-full max-w-screen mb-32 mt-20 gap-2">
         <span className=" text-gray-600">
-          We're still
+          We&apos;re still
         </span>
         <span className="text-6xl">
           Cooking our website
