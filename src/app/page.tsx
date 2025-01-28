@@ -7,7 +7,7 @@ export default function Home() {
       <Navbar />
       <div className="flex justify-center items-center w-full max-w-screen p-12">
         {/* Container with aspect ratio */}
-        <div className="relative w-full h-[800px] max-h-[800px]">
+        <div className="relative w-full h-[700px] max-h-[800px]">
           {/* Image fills container */}
           <Image 
             src="/hero1.png" 
@@ -18,9 +18,9 @@ export default function Home() {
           />
           
           {/* Text overlay */}
-          <div className="absolute left-[72px] bottom-20 z-10 text-[#FAFAFA] font-semibold flex flex-col gap-4">
+          <div className="absolute flex flex-col justify-center items-center md:justify-start md:items-start md:left-[72px] bottom-20 z-10 text-[#FAFAFA] font-semibold flex flex-col gap-4">
             BLOX RESIDENTIALS
-            <span className="font-normal text-6xl">
+            <span className="font-normal md:text-6xl text-2xl text-center">
               Your Trusted Partner In Finding Premier Properties
             </span>
             <button className="bg-[#FAFAFA] text-[#232323] px-10 py-4 rounded-lg w-fit">
@@ -29,7 +29,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center w-full max-w-screen mb-32 mt-20 gap-2">
+      <div className="flex flex-col text-center md:text-left justify-center items-center w-full max-w-screen mb-32 mt-20 gap-2">
         <span className=" text-gray-600">
           We&apos;re still
         </span>
@@ -40,7 +40,7 @@ export default function Home() {
           Launching our website very soon, Stay tuned.
         </span>
       </div>
-      <div className="flex flex-row justify-between items-center w-[calc(100%-112px)] mx-auto border-b-2 border-gray-200 pb-12">
+      <div className="flex flex-col gap-4 md:flex-row justify-between items-center w-[calc(100%-112px)] mx-auto border-b-2 border-gray-200 pb-12">
         <Image src="/logo1.png" alt="property" width={390} height={167} />
         <div className="flex flex-col gap-3">
           <div className="flex flex-row gap-3">
