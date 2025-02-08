@@ -4,7 +4,7 @@ const LocationGrid = () => {
   const [hoveredImage, setHoveredImage] = React.useState('');
   const locations = [
       { name: 'Hyderabad', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011003/ovlwwjgt4q2y9ecx9fet.png' },
-      { name: 'Chennai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011003/ovlwwjgt4q2y9ecx9fet.png' },
+      { name: 'Chennai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012407/w4fezdzabewaoaptewb0.png' },
       { name: 'Gurgaon', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011003/snooqyrz0iegzlae4fcd.png' },
       { name: 'Goa', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011009/ze5juhdujxqi8vqg9wld.png' },
       { name: 'Pune', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011009/joxasnhisqcmwwexe5om.png' },
