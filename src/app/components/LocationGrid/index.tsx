@@ -3,14 +3,14 @@ import React, { useEffect } from 'react';
 const LocationGrid = () => {
   const [hoveredImage, setHoveredImage] = React.useState('');
   const locations = [
-      { name: 'Hyderabad', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011003/ovlwwjgt4q2y9ecx9fet.png' },
-      { name: 'Chennai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012407/w4fezdzabewaoaptewb0.png' },
-      { name: 'Gurgaon', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011003/snooqyrz0iegzlae4fcd.png' },
-      { name: 'Goa', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011009/ze5juhdujxqi8vqg9wld.png' },
-      { name: 'Pune', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011009/joxasnhisqcmwwexe5om.png' },
-    { name: 'Ahmedabad',  image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011001/gpyaxxusswmlbqetg2ir.png' },
-    { name: 'Kochi', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011004/bqlugpqp6pqbfjscydzf.png' },
-    { name: 'Dubai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739011002/m41wjqjhwi6bk8gxir83.png' },
+      { name: 'Hyderabad', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012600/wwb9fhqu6hfthmutryih.png' },
+      { name: 'Chennai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012602/ng7vtl99xmndl1ylnrdv.png' },
+      { name: 'Gurgaon', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012600/kwpuiwleldqzfxcieacb.png' },
+      { name: 'Goa', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012601/z8ymn4wwyfu0yf0na49x.png' },
+      { name: 'Pune', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012601/vwefkc2omfbww2jzjxlf.png' },
+    { name: 'Ahmedabad',  image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012601/blohwdt3hujbbx3vmtf4.png' },
+    { name: 'Kochi', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012601/mdezdd6ahp4bvei4fllg.png' },
+    { name: 'Dubai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012602/xeezchdddnp4mpzhftpi.png' },
   ];
 
   useEffect(() => {
