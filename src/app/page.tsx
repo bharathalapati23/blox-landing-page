@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import PropertyShowcase from "./components/PropertyShowcase";
 import ContactForm from "./components/ContactForm";
@@ -21,10 +23,13 @@ export default function Home() {
           {/* Text overlay */}
           <div className="absolute flex flex-col justify-center items-center md:justify-start md:items-start md:left-[72px] bottom-20 z-10 text-[#FAFAFA] font-semibold gap-4">
             BLOX RESIDENTIALS
-            <span className="font-normal md:text-6xl text-2xl">
+            <span className="font-normal md:text-6xl text-2xl text-center md:text-left">
               Your <span className="font-semibold">Trusted Partner</span> In Finding Premier Properties
             </span>
-            <button className="bg-[#FAFAFA] text-[#232323] px-10 py-4 rounded-lg w-fit">
+            <button 
+              className="bg-[#FAFAFA] text-[#232323] px-10 py-4 rounded-lg w-fit" 
+              onClick={() => window.open('tel:+919738563155', '_blank')}
+            >
               Call us at +91 9738563155
             </button>
           </div>

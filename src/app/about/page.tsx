@@ -44,11 +44,11 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main className="p-8 pt-32 md:p-12 flex flex-col gap-10 bg-[#F7F7F7]">
+    <main className="p-4 md:p-8 pt-8 md:pt-32 lg:p-12 flex flex-col gap-6 md:gap-10 bg-[#F7F7F7]">
       {/* First Section - Existing content */}
-      <div className="flex flex-row justify-center gap-32">
+      <div className="flex flex-col lg:flex-row justify-center lg:gap-32 gap-8">
         {/* Left Section - Image */}
-        <div className="w-[517px] h-[494px] relative">
+        <div className="w-full lg:w-[517px] h-[300px] md:h-[494px] relative">
           <Image 
             src="https://res.cloudinary.com/dojfndzbj/image/upload/v1738998234/dp0rzn8cpzbbnxaq3doy.png" 
             alt="Business meeting"
@@ -59,10 +59,10 @@ export default function AboutPage() {
         </div>
 
         {/* Right Section - Content */}
-        <div className="max-w-[600px]">
+        <div className="w-full lg:max-w-[600px]">
           <div className="mb-4">
             <p className="text-sm uppercase tracking-wider text-gray-500 mb-4">HOW IT STARTED</p>
-            <h1 className="text-6xl font-bold mb-8">At Blox Residential&apos;s</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 md:mb-8">At Blox Residential&apos;s</h1>
             <p className="text-gray-600 mb-6">
               With over a decade of experience, Blox Residentials has been a trusted name in redefining real estate. 
               From its roots in Bengaluru, the company has grown to establish a strong presence across India&apos;s major metros and global markets.
@@ -74,35 +74,35 @@ export default function AboutPage() {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-8">
-            <div className="p-6 bg-white rounded-xl">
-              <h2 className="text-5xl font-bold text-[#FF4444] mb-2">{counts.years}+</h2>
-              <p className="text-gray-600">Years of experience</p>
+          <div className="grid grid-cols-2 gap-4 md:gap-8">
+            <div className="p-4 md:p-6 bg-white rounded-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#FF4444] mb-2">{counts.years}+</h2>
+              <p className="text-sm md:text-base text-gray-600">Years of experience</p>
             </div>
             
-            <div className="p-6 bg-white rounded-xl">
-              <h2 className="text-5xl font-bold text-[#232323] mb-2">₹{counts.crores}+</h2>
-              <p className="text-gray-600">Crores Transacted</p>
+            <div className="p-4 md:p-6 bg-white rounded-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#232323] mb-2">₹{counts.crores}+</h2>
+              <p className="text-sm md:text-base text-gray-600">Crores Transacted</p>
             </div>
             
-            <div className="p-6 bg-white rounded-xl">
-              <h2 className="text-5xl font-bold text-[#232323] mb-2">{counts.customers}+</h2>
-              <p className="text-gray-600">Happy Customers</p>
+            <div className="p-4 md:p-6 bg-white rounded-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#232323] mb-2">{counts.customers}+</h2>
+              <p className="text-sm md:text-base text-gray-600">Happy Customers</p>
             </div>
             
-            <div className="p-6 bg-white rounded-xl">
-              <h2 className="text-5xl font-bold text-[#232323] mb-2">{counts.projects}+</h2>
-              <p className="text-gray-600">Projects Sold</p>
+            <div className="p-4 md:p-6 bg-white rounded-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#232323] mb-2">{counts.projects}+</h2>
+              <p className="text-sm md:text-base text-gray-600">Projects Sold</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Mission Section */}
-      <div className="mx-auto bg-white p-12 rounded-xl shadow-sm max-w-[1264px]">
+      <div className="mx-auto bg-white p-6 md:p-12 rounded-xl shadow-sm w-full lg:max-w-[1264px]">
         <p className="text-sm uppercase tracking-wider text-gray-500 mb-4">OUR MISSION</p>
-        <div className="space-y-8">
-          <h2 className="text-6xl font-bold">
+        <div className="space-y-6 md:space-y-8">
+          <h2 className="text-4xl md:text-6xl font-bold">
             To provide<br />
             exceptional services
           </h2>
@@ -117,17 +117,17 @@ export default function AboutPage() {
       {/* Get in touch Section */}
       <div className="relative w-full rounded-xl overflow-hidden flex justify-center items-center">
         <div 
-          className="w-[1264px] h-[521px] bg-[url('https://res.cloudinary.com/dojfndzbj/image/upload/v1738997633/votbhzi11ad9tdb26uw9.png')] 
+          className="w-full lg:w-[1264px] h-[300px] md:h-[521px] bg-[url('https://res.cloudinary.com/dojfndzbj/image/upload/v1738997633/votbhzi11ad9tdb26uw9.png')] 
           bg-cover bg-center bg-no-repeat"
         >
-          <div className="relative z-10 flex flex-col justify-center h-full px-24">
-            <h2 className="text-5xl font-bold text-white mb-4">
+          <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-24">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
               Get in touch with us
             </h2>
-            <p className="text-gray-200 mb-8 max-w-[600px]">
+            <p className="text-gray-200 mb-6 md:mb-8 max-w-[600px] text-sm md:text-base">
               Want to know more about our services? or have something in mind? Please reach out to us!
             </p>
-            <button className="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors w-fit">
+            <button className="bg-white text-black px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors w-fit text-sm md:text-base">
               Contact us
             </button>
           </div>
