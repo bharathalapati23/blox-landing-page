@@ -1,11 +1,12 @@
-import Navbar from "./Navbar";
 import Image from "next/image";
+import PropertyShowcase from "./components/PropertyShowcase";
+import ContactForm from "./components/ContactForm";
+import LocationGrid from "./components/LocationGrid";
 
 export default function Home() {
   return (
     <div>
-      <Navbar />
-      <div className="flex justify-center items-center w-full max-w-screen p-12">
+      <div className="flex justify-center items-center w-full max-w-screen md:p-12 p-4">
         {/* Container with aspect ratio */}
         <div className="relative w-full h-[700px] max-h-[800px]">
           {/* Image fills container */}
@@ -18,10 +19,10 @@ export default function Home() {
           />
           
           {/* Text overlay */}
-          <div className="absolute flex flex-col justify-center items-center md:justify-start md:items-start md:left-[72px] bottom-20 z-10 text-[#FAFAFA] font-semibold flex flex-col gap-4">
+          <div className="absolute flex flex-col justify-center items-center md:justify-start md:items-start md:left-[72px] bottom-20 z-10 text-[#FAFAFA] font-semibold gap-4">
             BLOX RESIDENTIALS
-            <span className="font-normal md:text-6xl text-2xl text-center">
-              Your Trusted Partner In Finding Premier Properties
+            <span className="font-normal md:text-6xl text-2xl">
+              Your <span className="font-semibold">Trusted Partner</span> In Finding Premier Properties
             </span>
             <button className="bg-[#FAFAFA] text-[#232323] px-10 py-4 rounded-lg w-fit">
               Call us at +91 9738563155
@@ -29,43 +30,62 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col text-center md:text-left justify-center items-center w-full max-w-screen mb-32 mt-20 gap-2">
-        <span className=" text-gray-600">
-          We&apos;re still
-        </span>
-        <span className="text-6xl">
-          Cooking our website
-        </span>
-        <span className="text-xl">
-          Launching our website very soon, Stay tuned.
-        </span>
-      </div>
-      <div className="flex flex-col gap-4 md:flex-row justify-between items-center w-[calc(100%-112px)] mx-auto border-b-2 border-gray-200 pb-12">
-        <Image src="/logo1.png" alt="property" width={390} height={167} />
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-row gap-3">
-            <Image src="/Location.svg" alt="linkedin" width={24} height={17} />
-            <span className="text-[#090909] max-w-[400px] text-wrap">
-              No 22, 3rd Floor, Bellary Rd, Dena Bank Colony, Ganganagar, Bengaluru - 560032
-            </span>
+      <LocationGrid />
+      
+
+      {/* New Real Estate Services Section */}
+      <div className="px-12 mb-20">
+        <div className="mb-8">
+          <p className="text-gray-500 uppercase text-sm mb-4">END - TO - END SERVICES</p>
+          <h2 className="md:text-6xl text-3xl font-light text-gray-300 mb-1">Everything real estate</h2>
+          <h2 className="md:text-6xl text-3xl font-medium">under one roof</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Luxury Homes Card */}
+          <div className="cursor-pointer border-l-4 border-red-500 pl-4">
+            <h3 className="text-black font-medium md:text-[32px] text-xl mb-2">Luxury and Vacation Homes</h3>
+            <p className="text-gray-500">Premium properties for discerning buyers</p>
+            <div className="mt-4">
+              
+            </div>
           </div>
-          <div className="flex flex-row gap-3">
-            <Image src="/Email.svg" alt="facebook" width={24} height={17} />
-            <span className="text-[#090909]">
-                info@bloxresidential.com
-            </span>
+
+          {/* NRI Services Card */}
+          <div className="cursor-pointer border-l-4 border-red-500 pl-4">
+            <h3 className="text-black font-medium md:text-[32px] text-xl mb-2">NRI Services</h3>
+            <p className="text-gray-500">End-to-end solutions for NRI real estate needs</p>
+            <div className="mt-4">
+              
+            </div>
           </div>
-          <div className="flex flex-row gap-3">
-            <Image src="/Phone.svg" alt="instagram" width={24} height={17} />
-            <span className="text-[#090909]">
-              +91 9738563155
-            </span>
+
+          {/* Buy, Sell & Rent Card */}
+          <div className="cursor-pointer border-l-4 border-red-500 pl-4">
+            <h3 className="text-black font-medium md:text-[32px] text-xl mb-2">Buy, Sell & Rent</h3>
+            <p className="text-gray-500">Complete real estate transaction solutions</p>
+            <div className="mt-4">
+              
+            </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-end items-center w-[calc(100%-112px)] mx-auto pb-12 pt-2">
-        Copyright © 2025 • BLOX RESIDENTIALS.
+      {/* New full width image section */}
+      <div className="relative w-[calc(100%-96px)] h-[450px] mx-12 rounded-xl overflow-hidden">
+        <Image 
+          src="https://res.cloudinary.com/dojfndzbj/image/upload/v1738999007/yxrnz34e5lmiuqblkdkk.png"
+          alt="Full width background"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
+
+      {/* Property Showcase Component */}
+      <PropertyShowcase />
+
+      {/* Contact Form Component */}
+      <ContactForm />
     </div>
   );
 }
