@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import FloorPlanSection from '../../properties/FloorPlanSection';
+import VirtualTour from '../../components/VirtualTour';
+import ModalForm from '../../components/ContactForm/ModalForm';
 
 interface PropertyConfiguration {
   noOfBedrooms: number;
@@ -24,6 +27,8 @@ interface Property {
   popular: boolean;
   brochure?: string;
   propertyConfiguration: PropertyConfiguration[];
+  floorPlan: string[];
+  video?: string;
 }
 
 export default function PropertyDetailPage() {
@@ -33,7 +38,7 @@ export default function PropertyDetailPage() {
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState<string | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   useEffect(() => {
     async function fetchProperty() {
@@ -65,7 +70,9 @@ export default function PropertyDetailPage() {
             images: propertyData.images,
             popular: true,
             brochure: propertyData.brochure,
-            propertyConfiguration: propertyData.propertyConfiguration
+            propertyConfiguration: propertyData.propertyConfiguration,
+            floorPlan: propertyData.floorPlan || [],
+            video: propertyData.video
           };
           
           setProperty(formattedProperty);
@@ -84,10 +91,6 @@ export default function PropertyDetailPage() {
       fetchProperty();
     }
   }, [propertyId]);
-
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
 
   if (loading) {
     return (
@@ -110,7 +113,24 @@ export default function PropertyDetailPage() {
   }
 
   return (
-    <main className="bg-[#F7F7F7] min-h-screen pt-32 pb-16">
+    <main className="bg-[#F7F7F7] min-h-screen pt-8 md:pt-32 pb-16">
+      {/* Contact Form Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-auto relative">
+            <button 
+              onClick={() => setShowContactModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <ModalForm />
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Breadcrumb Navigation */}
         <div className="mb-6">
@@ -167,21 +187,6 @@ export default function PropertyDetailPage() {
                   </svg>
                   Brochure
                 </a>
-                <button 
-                  onClick={toggleFavorite}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-800 p-2 rounded flex items-center justify-center transition-colors"
-                  aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-                >
-                  {isFavorite ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-red-500">
-                      <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                    </svg>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                    </svg>
-                  )}
-                </button>
               </div>
             </div>
           </div>
@@ -228,6 +233,11 @@ export default function PropertyDetailPage() {
           <p className="text-gray-700 whitespace-pre-line">{property.overview}</p>
         </div>
 
+        {/* Floor Plans Section */}
+        <div className="mb-8">
+          <FloorPlanSection property={property} />
+        </div>
+
         {/* Property Configuration */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-2xl font-bold mb-6">Property Configuration</h2>
@@ -265,6 +275,11 @@ export default function PropertyDetailPage() {
           </div>
         </div>
 
+        {/* Virtual Tour Section */}
+        {property.video && (
+          <VirtualTour videoUrl={property.video} title={`${property.title} - Virtual Tour`} />
+        )}
+
         {/* Contact Section */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex flex-col md:flex-row items-center justify-between">
@@ -281,7 +296,10 @@ export default function PropertyDetailPage() {
                 </svg>
                 Call Now
               </a>
-              <button className="bg-black text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2">
+              <button 
+                onClick={() => setShowContactModal(true)}
+                className="bg-black text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>

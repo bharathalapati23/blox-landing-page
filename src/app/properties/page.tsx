@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ModalForm from '../components/ContactForm/ModalForm';
 
 interface PropertyConfig {
   name: string;
@@ -26,6 +27,7 @@ export default function PropertiesPage() {
   // State for property data
   const [properties, setProperties] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   // Fetch property data from JSON file
   useEffect(() => {
@@ -54,7 +56,8 @@ export default function PropertiesPage() {
             brochure: property.brochure,
             overview: property.overview,
             propertyConfiguration: property.propertyConfiguration,
-            images: property.images
+            images: property.images,
+            floorPlan: property.floorPlan || []
           };
         });
         
@@ -70,20 +73,6 @@ export default function PropertiesPage() {
     
     fetchProperties();
   }, []);
-
-  // State for favorited properties
-  const [favorites, setFavorites] = useState<Record<number, boolean>>({});
-
-  // Toggle favorite status
-  const toggleFavorite = (id: number, e: React.MouseEvent) => {
-    // Stop event propagation to prevent navigation when clicking the favorite button
-    e.stopPropagation();
-    
-    setFavorites(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
 
   // Property Card Component
   const PropertyCard = ({ property }: { property: typeof properties[0] }) => {
@@ -113,27 +102,10 @@ export default function PropertiesPage() {
           </div>
 
           <div className="p-4">
-            {/* Price and Favorite */}
-            <div className="flex justify-between items-center mb-2">
-              <div>
-                <span className="text-red-500 text-xl font-bold">{property.price}</span>
-                <span className="text-gray-500 ml-1">Onwards</span>
-              </div>
-              <button 
-                onClick={(e) => toggleFavorite(property.id, e)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
-                aria-label="Add to favorites"
-              >
-                {favorites[property.id] ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-red-500">
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                  </svg>
-                )}
-              </button>
+            {/* Price */}
+            <div className="mb-2">
+              <span className="text-red-500 text-xl font-bold">{property.price}</span>
+              <span className="text-gray-500 ml-1">Onwards</span>
             </div>
 
             {/* Property Title */}
@@ -183,7 +155,7 @@ export default function PropertiesPage() {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  // Contact functionality would go here
+                  window.open('tel:+919738563155', '_blank');
                 }}
                 className="bg-green-800 text-white p-3 rounded-lg flex items-center justify-center"
               >
@@ -200,6 +172,23 @@ export default function PropertiesPage() {
 
   return (
     <main className="p-4 md:p-8 pt-8 md:pt-32 lg:p-12 flex flex-col gap-6 md:gap-10 bg-[#F7F7F7]">
+      {/* Contact Form Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-auto relative">
+            <button 
+              onClick={() => setShowContactModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <ModalForm />
+          </div>
+        </div>
+      )}
+      
       {/* Hero Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">Find Your Dream Property</h1>
@@ -240,7 +229,10 @@ export default function PropertiesPage() {
               that matches your requirements and budget.
             </p>
           </div>
-          <button className="bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+          <button 
+            onClick={() => setShowContactModal(true)} 
+            className="bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+          >
             Contact an Agent
           </button>
         </div>

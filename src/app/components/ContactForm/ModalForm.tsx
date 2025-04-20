@@ -1,11 +1,9 @@
-"use client";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from 'react';
 
 interface FormData {
   name: string;
   email: string;
   service: string;
-  budget: string;
   message: string;
   phone: string;
   [key: string]: string; // Index signature to allow dynamic access
@@ -16,14 +14,13 @@ interface SubmitStatus {
   error: string | null;
 }
 
-export default function ContactPage() {
+export default function ModalForm() {
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    service: "",
-    budget: "",
-    message: "",
-    phone: ""
+    name: '',
+    email: '',
+    service: '',
+    message: '',
+    phone: ''
   });
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>({ success: false, error: null });
@@ -41,6 +38,7 @@ export default function ContactPage() {
     try {
       // Build URL with query parameters
       const scriptURL = 'https://script.google.com/macros/s/AKfycbzzu9KzPIz-7W9Dl6eAEJVKNhrWA904fCmplLTXNbV2wdpc1VQeecWfr1cfrT8Bz_jR/exec';
+      const url = new URL(scriptURL);
       
       // Create a FormData object for the fetch request
       const formDataToSend = new FormData();
@@ -61,12 +59,11 @@ export default function ContactPage() {
       
       // Reset form after successful submission
       setFormData({
-        name: "",
-        email: "",
-        service: "",
-        budget: "",
-        message: "",
-        phone: ""
+        name: '',
+        email: '',
+        service: '',
+        message: '',
+        phone: ''
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -80,44 +77,27 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="p-4 pt-20 md:p-8 md:pt-32 lg:p-12 flex flex-col items-center lg:flex-row lg:items-start justify-center lg:gap-32 bg-[#F7F7F7] text-[#232323]">
-      {/* Title Section - Always at top */}
-      <div className="w-full max-w-xl lg:w-1/3 lg:max-w-[327px] lg:flex lg:flex-col lg:justify-between">
-        <div className="mb-8 lg:mb-0">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Let&apos;s Talk</h1>
-            <p className="mb-6 lg:mb-12 text-base sm:text-lg">
+    <div className="px-4 sm:px-6 md:px-8 py-6 md:py-8 bg-gray-100">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+        {/* Left side - Text */}
+        <div>
+          <h2 className="text-3xl md:text-4xl font-medium mb-4">Get in touch</h2>
+          <p className="text-gray-500">
             Want to know more about our services? or have something in mind? Please reach out to us!
-            </p>
+          </p>
         </div>
 
-        {/* Contact Info - Hidden on mobile, shown on desktop */}
-        <div className="hidden lg:block space-y-6">
-          <div>
-            <h3 className="mb-2 text-[#C6C6C6] text-2xl md:text-3xl">Email</h3>
-            <p className="text-gray-600">info@bloxresidentials.com</p>
-          </div>
-
-          <div>
-            <h3 className="font-medium mb-2 text-[#C6C6C6] text-2xl md:text-3xl">Socials</h3>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-600 hover:text-black transition-colors">Instagram</a>
-              <a href="#" className="text-gray-600 hover:text-black transition-colors">Twitter</a>
-              <a href="#" className="text-gray-600 hover:text-black transition-colors">Facebook</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Form Section */}
-      <div className="w-full max-w-xl lg:w-2/3 lg:max-w-[733px]">
-        <div className="bg-white p-5 sm:p-6 md:p-8 lg:p-12 rounded-xl shadow-sm">
+        {/* Right side - Form */}
+        <div className="p-4 md:p-6 rounded-2xl shadow-lg border border-gray-200" style={{ 
+          backgroundImage: 'linear-gradient(135deg, #FFC4C9 0%, white 30%)'
+        }}>
           {submitStatus.success ? (
             <div className="text-center py-8">
               <h3 className="text-2xl font-medium text-green-600 mb-2">Thank You!</h3>
               <p className="text-gray-600">Your message has been submitted successfully. We'll get back to you soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <form className="space-y-4 md:space-y-5" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Name
@@ -127,8 +107,8 @@ export default function ContactPage() {
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
+                  className="w-full px-4 py-2 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 />
               </div>
 
@@ -141,8 +121,8 @@ export default function ContactPage() {
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
+                  className="w-full px-4 py-2 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 />
               </div>
 
@@ -155,8 +135,8 @@ export default function ContactPage() {
                   id="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
+                  className="w-full px-4 py-2 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 />
               </div>
 
@@ -168,13 +148,10 @@ export default function ContactPage() {
                   id="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
+                  className="w-full px-4 py-2 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 >
-                  <option value="">Select a service</option>
-                  <option value="residential">Residential Property</option>
-                  <option value="commercial">Commercial Property</option>
-                  <option value="consultation">Property Consultation</option>
+                  <option value="">Select project type</option>
                   <option value="luxury">Luxury Homes</option>
                   <option value="nri">NRI Services</option>
                   <option value="buy">Buy Property</option>
@@ -184,36 +161,17 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
-                  Budget
-                </label>
-                <select
-                  id="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-                  required
-                >
-                  <option value="">Select your budget</option>
-                  <option value="0-50k">₹0 - ₹50,000</option>
-                  <option value="50k-1L">₹50,000 - ₹1,00,000</option>
-                  <option value="1L-5L">₹1,00,000 - ₹5,00,000</option>
-                  <option value="5L+">₹5,00,000+</option>
-                </select>
-              </div>
-
-              <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                   Message
                 </label>
                 <textarea
                   id="message"
+                  rows={3}
                   value={formData.message}
                   onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
-                />
+                  className="w-full px-4 py-2 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                ></textarea>
               </div>
 
               {submitStatus.error && (
@@ -223,8 +181,8 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition-colors ${
-                  loading ? 'opacity-70 cursor-not-allowed' : ''
+                className={`w-full bg-black text-white py-3 rounded-lg transition-colors ${
+                  loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-gray-800'
                 }`}
               >
                 {loading ? 'Submitting...' : 'Submit'}
@@ -232,24 +190,7 @@ export default function ContactPage() {
             </form>
           )}
         </div>
-
-        {/* Contact Info - Shown on mobile, hidden on desktop */}
-        <div className="mt-8 space-y-4 sm:space-y-6 lg:hidden px-1">
-          <div>
-            <h3 className="mb-2 text-[#C6C6C6] text-xl sm:text-2xl md:text-3xl">Email</h3>
-            <p className="text-gray-600">info@bloxresidentials.com</p>
-          </div>
-
-          <div>
-            <h3 className="font-medium mb-2 text-[#C6C6C6] text-xl sm:text-2xl md:text-3xl">Socials</h3>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-600 hover:text-black transition-colors">Instagram</a>
-              <a href="#" className="text-gray-600 hover:text-black transition-colors">Twitter</a>
-              <a href="#" className="text-gray-600 hover:text-black transition-colors">Facebook</a>
-            </div>
-          </div>
-        </div>
       </div>
-    </main>
+    </div>
   );
 } 
