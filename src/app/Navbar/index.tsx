@@ -20,6 +20,9 @@ export default function Navbar() {
             <Link href="/" className="text-gray-700 hover:text-black font-medium">
               Home
             </Link>
+            <Link href="/properties" className="text-gray-700 hover:text-black font-medium">
+              Properties
+            </Link>
             <Link href="/about" className="text-gray-700 hover:text-black font-medium">
               About
             </Link>
@@ -72,6 +75,13 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               Home
+            </Link>
+            <Link 
+              href="/properties" 
+              className="px-4 py-2 text-gray-700 hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Properties
             </Link>
             <Link 
               href="/about" 
