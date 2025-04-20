@@ -10,22 +10,39 @@ interface PropertyConfig {
   developmentSize: number;
   totalUnits: number;
   overview: string;
-  floorPlan: any[];
+  floorPlan: string[];
   propertyConfiguration: {
     noOfBedrooms: number;
     pricing: string;
     sqFootage: string;
   }[];
-  walkThrough: any;
-  location: any;
-  propertyIcon: any;
+  walkThrough: string;
+  location: string;
+  propertyIcon: string;
   images: string[];
   brochure?: string;
 }
 
+interface FormattedProperty {
+  id: number;
+  title: string;
+  location: string;
+  price: string;
+  bhk: string;
+  acres: string;
+  units: string;
+  image: string;
+  popular: boolean;
+  brochure?: string;
+  overview: string;
+  propertyConfiguration: PropertyConfig['propertyConfiguration'];
+  images: string[];
+  floorPlan: string[];
+}
+
 export default function PropertiesPage() {
   // State for property data
-  const [properties, setProperties] = useState<any[]>([]);
+  const [properties, setProperties] = useState<FormattedProperty[]>([]);
   const [loading, setLoading] = useState(true);
   const [showContactModal, setShowContactModal] = useState(false);
 
@@ -75,7 +92,7 @@ export default function PropertiesPage() {
   }, []);
 
   // Property Card Component
-  const PropertyCard = ({ property }: { property: typeof properties[0] }) => {
+  const PropertyCard = ({ property }: { property: FormattedProperty }) => {
     return (
       <Link href={`/property/${property.id}`} className="block transition-transform hover:scale-[1.02] duration-200">
         <div className="bg-white rounded-lg overflow-hidden border border-gray-200 h-full">

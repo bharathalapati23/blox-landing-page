@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 const LocationGrid = () => {
   const [hoveredImage, setHoveredImage] = React.useState('');
-  const locations = [
+  
+  const locations = useMemo(() => [
       { name: 'Hyderabad', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012600/wwb9fhqu6hfthmutryih.png' },
       { name: 'Chennai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012602/ng7vtl99xmndl1ylnrdv.png' },
       { name: 'Gurgaon', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012600/kwpuiwleldqzfxcieacb.png' },
@@ -11,7 +12,7 @@ const LocationGrid = () => {
     { name: 'Ahmedabad',  image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012601/blohwdt3hujbbx3vmtf4.png' },
     { name: 'Kochi', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012601/mdezdd6ahp4bvei4fllg.png' },
     { name: 'Dubai', image: 'https://res.cloudinary.com/dojfndzbj/image/upload/v1739012602/xeezchdddnp4mpzhftpi.png' },
-  ];
+  ], []);
 
   useEffect(() => {
     // Preload all images
@@ -19,7 +20,7 @@ const LocationGrid = () => {
       const img = new Image();
       img.src = location.image;
     });
-  }, []); // Empty dependency array means this runs once on mount
+  }, [locations]); // Add locations to dependency array
 
   return (
     <div 

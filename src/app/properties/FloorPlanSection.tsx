@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
 interface FloorPlanProps {
@@ -12,8 +12,8 @@ interface FloorPlanProps {
 export default function FloorPlanSection({ property }: FloorPlanProps) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
-  // Use the floorPlan images from the property data
-  const floorPlanImages = property.floorPlan || [];
+  // Use useMemo to prevent unnecessary recalculations
+  const floorPlanImages = useMemo(() => property.floorPlan || [], [property.floorPlan]);
   
   // Debug log to check if floorPlan images are being received
   useEffect(() => {

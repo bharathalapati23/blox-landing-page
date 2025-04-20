@@ -49,7 +49,7 @@ export default function ContactPage() {
       });
 
       // Send as a form submission, which is better supported by Google Apps Script
-      const response = await fetch(scriptURL, {
+      await fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors', // Required for Google Apps Script
         body: formDataToSend
@@ -114,7 +114,7 @@ export default function ContactPage() {
           {submitStatus.success ? (
             <div className="text-center py-8">
               <h3 className="text-2xl font-medium text-green-600 mb-2">Thank You!</h3>
-              <p className="text-gray-600">Your message has been submitted successfully. We'll get back to you soon.</p>
+              <p className="text-gray-600">Your message has been submitted successfully. We&apos;ll get back to you soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">

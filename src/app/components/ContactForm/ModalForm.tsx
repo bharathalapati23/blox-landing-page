@@ -38,7 +38,6 @@ export default function ModalForm() {
     try {
       // Build URL with query parameters
       const scriptURL = 'https://script.google.com/macros/s/AKfycbzzu9KzPIz-7W9Dl6eAEJVKNhrWA904fCmplLTXNbV2wdpc1VQeecWfr1cfrT8Bz_jR/exec';
-      const url = new URL(scriptURL);
       
       // Create a FormData object for the fetch request
       const formDataToSend = new FormData();
@@ -47,7 +46,7 @@ export default function ModalForm() {
       });
 
       // Send as a form submission, which is better supported by Google Apps Script
-      const response = await fetch(scriptURL, {
+      await fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors', // Required for Google Apps Script
         body: formDataToSend
@@ -94,7 +93,7 @@ export default function ModalForm() {
           {submitStatus.success ? (
             <div className="text-center py-8">
               <h3 className="text-2xl font-medium text-green-600 mb-2">Thank You!</h3>
-              <p className="text-gray-600">Your message has been submitted successfully. We'll get back to you soon.</p>
+              <p className="text-gray-600">Your message has been submitted successfully. We&apos;ll get back to you soon.</p>
             </div>
           ) : (
             <form className="space-y-4 md:space-y-5" onSubmit={handleSubmit}>
